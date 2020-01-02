@@ -44,7 +44,7 @@ class Client
      * Client constructor.
      * @param array $config
      */
-    public function __construct($config = [])
+    public static function setConfig($config = [])
     {
         if (!empty($config['ip'])) self::$ip = $config['ip'];
         if (!empty($config['port'])) self::$port = $config['port'];
@@ -54,7 +54,7 @@ class Client
     }
 
     /**
-     * 获取
+     * 获取键值
      * @param string $key 键名
      * @param string|int $default 默认
      * @return mixed
@@ -64,28 +64,26 @@ class Client
     {
         if (empty($key)) throw new Exception('请检查参数');
         $name = $key;
-        if (!empty( self::$prefix)) $name = self::$prefix . $key;
+        if (!empty(self::$prefix)) $name = self::$prefix . $key;
         $redis = Base::connection(self::$db, self::$ip, self::$port);
-        try {
-            return $redis->get($name);
-        } catch (Exception $e) {
-            return $default;
-        }
+        $exists = $redis->exists($key);
+        if (!empty($exists)) return $redis->get($name);
+        return $default;
     }
 
 
     /**
-     * 设置
+     * 设置键值
      * 这里的时间优先于全局
      * @param string $key 键名
-     * @param $value
+     * @param string|int $value 键值
      * @param int $ttl
      * @return bool
      * @throws Exception
      */
     public static function set($key, $value, $ttl = 0)
     {
-        if (empty($key) || empty($value)) throw new Exception('请检查参数');
+        if (empty($key)) throw new Exception('请检查参数');
         $name = $key;
         if (!empty(self::$prefix)) $name = self::$prefix . $key;
         $redis = Base::connection(self::$db, self::$ip, self::$port);
