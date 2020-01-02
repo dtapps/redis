@@ -1,0 +1,36 @@
+{
+  "name": "liguangchun/redis",
+  "description": "Redis助手",
+  "keywords": [
+    "liguangchun",
+    "redis"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Chaim",
+      "email": "gc@dtapp.net",
+      "homepage": "https://api.dtapp.net"
+    }
+  ],
+  "homepage": "https://www.dtapp.net",
+  "require": {
+    "php": ">=7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Redis\\": "src"
+    }
+  },
+  "repositories": {
+    "0": {
+      "type": "composer",
+      "url": "https://packagist.dtapp.net"
+    },
+    "packagist": {
+      "type": "composer",
+      "url": "https://mirrors.aliyun.com/composer/"
+    }
+  }
+}
