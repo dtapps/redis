@@ -66,7 +66,7 @@ class Client
         $name = $key;
         if (!empty(self::$prefix)) $name = self::$prefix . $key;
         $redis = Base::connection(self::$db, self::$ip, self::$port);
-        $exists = $redis->exists($key);
+        $exists = $redis->exists($name);
         if (!empty($exists)) return $redis->get($name);
         return $default;
     }
