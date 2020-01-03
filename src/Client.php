@@ -118,7 +118,7 @@ class Client
 
     /**
      * 删除一个key
-     * @param string $key
+     * @param string $key 键名
      * @return int
      * @throws Exception
      */
@@ -131,5 +131,37 @@ class Client
         $res = $redis->del($name);
         if (!empty($res)) return true;
         return false;
+    }
+
+    /**
+     * 自增
+     * @param string $key 键名
+     * @param int $mun 数
+     * @return int
+     * @throws Exception
+     */
+    public static function inc($key, $mun = 1)
+    {
+        if (empty($key)) throw new Exception('请检查参数');
+        $name = $key;
+        if (!empty(self::$prefix)) $name = self::$prefix . $key;
+        $redis = Base::connection(self::$db, self::$ip, self::$port);
+        return $redis->incrBy($name, $mun);
+    }
+
+    /**
+     * 自减
+     * @param string $key 键名
+     * @param int $mun 数
+     * @return int
+     * @throws Exception
+     */
+    public static function dec($key, $mun = 1)
+    {
+        if (empty($key)) throw new Exception('请检查参数');
+        $name = $key;
+        if (!empty(self::$prefix)) $name = self::$prefix . $key;
+        $redis = Base::connection(self::$db, self::$ip, self::$port);
+        return $redis->decrBy($name, $mun);
     }
 }
