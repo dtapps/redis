@@ -11,7 +11,7 @@ namespace DtApp\Redis;
  * Class Exception
  * @package Redis
  */
-class Exception extends \Exception
+class RedisException extends \Exception
 {
     public function errorMessage()
     {

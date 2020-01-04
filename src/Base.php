@@ -20,19 +20,19 @@ class Base extends Client
      * @param string $ip
      * @param int $port
      * @return Redis
-     * @throws Exception
+     * @throws RedisException
      */
     protected static function connection($db = "0", $ip = "127.0.0.1", $port = 6379)
     {
         try {
             $redis = new Redis();
-        } catch (Exception $e) {
-            throw new Exception('php.ini缺少php_redis.dll文件配置');
+        } catch (RedisException $e) {
+            throw new RedisException('php.ini缺少php_redis.dll文件配置');
         }
         try {
             $redis->connect($ip, $port);
-        } catch (Exception $e) {
-            throw new Exception("连接redis服务器失败,请检查redis服务器是否开启");
+        } catch (RedisException $e) {
+            throw new RedisException("连接redis服务器失败,请检查redis服务器是否开启");
         }
         $redis->select($db);
         return $redis;

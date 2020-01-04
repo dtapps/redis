@@ -58,11 +58,11 @@ class Client
      * @param string $key 键名
      * @param string|int $default 默认
      * @return mixed
-     * @throws Exception
+     * @throws RedisException
      */
     public static function get($key, $default = '')
     {
-        if (empty($key)) throw new Exception('请检查参数');
+        if (empty($key)) throw new RedisException('请检查参数');
         $name = $key;
         if (!empty(self::$prefix)) $name = self::$prefix . $key;
         $redis = Base::connection(self::$db, self::$ip, self::$port);
@@ -79,11 +79,11 @@ class Client
      * @param string|int $value 键值
      * @param int $ttl
      * @return bool
-     * @throws Exception
+     * @throws RedisException
      */
     public static function set($key, $value, $ttl = 0)
     {
-        if (empty($key)) throw new Exception('请检查参数');
+        if (empty($key)) throw new RedisException('请检查参数');
         $name = $key;
         if (!empty(self::$prefix)) $name = self::$prefix . $key;
         $redis = Base::connection(self::$db, self::$ip, self::$port);
@@ -105,11 +105,11 @@ class Client
      * 查看key的存活时间
      * @param string $key 键名
      * @return bool|int
-     * @throws Exception
+     * @throws RedisException
      */
     public static function getTtl($key)
     {
-        if (empty($key)) throw new Exception('请检查参数');
+        if (empty($key)) throw new RedisException('请检查参数');
         $name = $key;
         if (!empty(self::$prefix)) $name = self::$prefix . $key;
         $redis = Base::connection(self::$db, self::$ip, self::$port);
@@ -120,11 +120,11 @@ class Client
      * 删除一个key
      * @param string $key 键名
      * @return int
-     * @throws Exception
+     * @throws RedisException
      */
     public static function del($key)
     {
-        if (empty($key)) throw new Exception('请检查参数');
+        if (empty($key)) throw new RedisException('请检查参数');
         $name = $key;
         if (!empty(self::$prefix)) $name = self::$prefix . $key;
         $redis = Base::connection(self::$db, self::$ip, self::$port);
@@ -138,11 +138,11 @@ class Client
      * @param string $key 键名
      * @param int $mun 数
      * @return int
-     * @throws Exception
+     * @throws RedisException
      */
     public static function inc($key, $mun = 1)
     {
-        if (empty($key)) throw new Exception('请检查参数');
+        if (empty($key)) throw new RedisException('请检查参数');
         $name = $key;
         if (!empty(self::$prefix)) $name = self::$prefix . $key;
         $redis = Base::connection(self::$db, self::$ip, self::$port);
@@ -154,11 +154,11 @@ class Client
      * @param string $key 键名
      * @param int $mun 数
      * @return int
-     * @throws Exception
+     * @throws RedisException
      */
     public static function dec($key, $mun = 1)
     {
-        if (empty($key)) throw new Exception('请检查参数');
+        if (empty($key)) throw new RedisException('请检查参数');
         $name = $key;
         if (!empty(self::$prefix)) $name = self::$prefix . $key;
         $redis = Base::connection(self::$db, self::$ip, self::$port);
